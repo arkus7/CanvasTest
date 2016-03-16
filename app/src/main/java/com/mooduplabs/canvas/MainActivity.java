@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
                     toRemove.add(circle);
                 }
             }
+            Paint textPaint = new Paint();
+            textPaint.setColor(getResources().getColor(android.R.color.white));
+            textPaint.setTextSize(100);
+            canvas.drawText("Score: " + String.valueOf(score), 100, 100, textPaint);
             canvas.drawBitmap(player.getIcon(), player.getX(), player.getY(), null);
             holder.unlockCanvasAndPost(canvas);
             circles.removeAll(toRemove);
