@@ -19,6 +19,11 @@ public class Entity {
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
+
+    public int getColor() {
+        return color;
+    }
+
     public void setColor(int color) {
         this.color = color;
     }
