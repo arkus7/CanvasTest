@@ -3,7 +3,6 @@ package com.mooduplabs.canvas;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -43,9 +42,13 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getScreenSize();
+        initFields();
+    }
+
+    private void initFields() {
         moveTimer = new Timer();
         circles = new ArrayList<>();
-        player = new Entity(SCREEN_WIDTH/2, SCREEN_HEIGHT - 500, CIRCLE_RADIUS);
+        player = new Entity(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 500, CIRCLE_RADIUS);
         surfaceView.setOnTouchListener(this);
         Bitmap playerBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         player.setIcon(playerBitmap);
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
         int action = event.getAction();
         if(action == MotionEvent.ACTION_MOVE) {
             float x = event.getX();
-            player.setSpeed(500 * (x < SCREEN_WIDTH/2.0 ? - 1 : 1));
+            player.setSpeed(500 * (x < SCREEN_WIDTH / 2.0 ? - 1 : 1));
         } else {
             player.setSpeed(0);
         }
