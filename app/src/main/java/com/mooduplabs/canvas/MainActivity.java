@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
         surfaceView.setOnTouchListener(this);
         Bitmap playerBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         player.setIcon(playerBitmap);
-        moveTimer.scheduleAtFixedRate(new MoveTask(), 1000, 20);
-        moveTimer.scheduleAtFixedRate(new RandomCircleTask(), 2000, 2000);
     }
 
     @Override
@@ -63,6 +61,32 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
             player.setSpeed(0);
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTimer.cancel();
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        moveTimer.cancel();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        moveTimer.cancel();
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        moveTimer = new Timer();
+        moveTimer.scheduleAtFixedRate(new MoveTask(), 1000, 20);
+        moveTimer.scheduleAtFixedRate(new RandomCircleTask(), 2000, 2000);
     }
 
     public void getScreenSize() {
