@@ -1,5 +1,6 @@
 package com.mooduplabs.canvas;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import java.util.Random;
@@ -10,6 +11,7 @@ public class Entity {
     private String iconPath;
     private int speed;
     private double radius;
+    private Bitmap icon;
     private int color;
 
     public Entity(int x, int y, double radius) {
@@ -18,6 +20,14 @@ public class Entity {
         this.radius = radius;
         Random rnd = new Random();
         this.color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+    public Bitmap getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Bitmap icon) {
+        this.icon = icon;
     }
 
     public int getColor() {
