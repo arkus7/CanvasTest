@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
     private int SCREEN_WIDTH;
     private int SCREEN_HEIGHT;
     private final double CIRCLE_RADIUS = 100.0;
+    private int score = 0;
 
     Timer moveTimer;
 
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
     class MoveTask extends TimerTask {
         @Override
         public void run() {
+            List<Entity> toRemove = new ArrayList<>();
             double xPerFrame = player.getSpeed() / 60.0;
             int newX = (int) (player.getX() + xPerFrame);
             if(newX < 0)
@@ -103,10 +105,18 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
                 circle.setY(newY);
                 Paint paint = new Paint();
                 paint.setColor(circle.getColor());
-                canvas.drawCircle(circle.getX(), newY, (float) circle.getRadius(), paint);
+                if(! circle.isCollided(player)) {
+                    canvas.drawCircle(circle.getX(), newY, (float) circle.getRadius(), paint);
+                } else if(circle.isCollided(player)) {
+                    toRemove.add(circle);
+                    score += 10;
+                } else if(circle.getY() > SCREEN_HEIGHT) {
+                    toRemove.add(circle);
+                }
             }
             canvas.drawBitmap(player.getIcon(), player.getX(), player.getY(), null);
             holder.unlockCanvasAndPost(canvas);
+            circles.removeAll(toRemove);
         }
     }
 }
