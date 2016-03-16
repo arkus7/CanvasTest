@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceView.OnTou
     protected void onResume() {
         super.onResume();
         moveTimer = new Timer();
-        moveTimer.scheduleAtFixedRate(new MoveTask(), 1000, 20);
+        moveTimer.scheduleAtFixedRate(new MoveTask(), 1000, 5);
         moveTimer.scheduleAtFixedRate(new RandomCircleTask(), 2000, 2000);
     }
 
